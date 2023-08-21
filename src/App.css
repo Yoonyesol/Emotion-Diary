@@ -38,7 +38,7 @@ body{
   border: none;
   border-radius: 5px;
 
-  padding: 10 20 10 20;
+  padding: 10px 20px 10px 20px;
 
   font-size: 18px;
 
@@ -92,4 +92,33 @@ header .head_btn_right{
 
 header button{
   font-family: "Noto Serif KR";
+}
+
+/* Diary List */
+.DiaryList .menu_wrapper{
+  margin: 20px 0px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.DiaryList .menu_wrapper .right_col{
+  flex-grow: 1; /*left col을 제외한 전체 영역의 넓이를 갖게 됨*/
+}
+
+.DiaryList .menu_wrapper .right_col button{
+  width: 100%;
+}
+
+.DiaryList .ControlMenu{
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding: 10px 20px;
+
+  cursor: pointer;
+  font-family: "Noto Serif KR";
+  font-size: 18px;
 }
