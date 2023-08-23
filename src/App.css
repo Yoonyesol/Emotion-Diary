@@ -218,6 +218,28 @@ header button{
   gap: 2%;
 }
 
+.DiaryEditor textarea{
+  font-family: "Noto Serif KR";
+  font-size: 18px;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  resize: vertical; /*위아래로만 리사이즈 가능*/
+
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding: 20px;
+}
+
+.DiaryEditor .control_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /*세로축에서 중앙에 맞춤*/
+}
+
 /* Emotion Item */
 .EmotionItem{
   cursor: pointer;
