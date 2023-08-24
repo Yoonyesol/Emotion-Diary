@@ -2,7 +2,7 @@ import MyHeader from "./MyHeader"
 import MyButton from "./MyButton"
 
 import { useNavigate } from "react-router";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import EmotionItem from "./EmotionItem";
 import {DiaryDispatchContext} from "./../App.js"
 
@@ -38,13 +38,13 @@ const getStringDate = (date) => {
   return date.toISOString().slice(0, 10); //ISO형식의 문자열 반환(ex.2023-08-22)
 }
 
-const DiaryEditor = () => {
+const DiaryEditor = ({isEdit, originData}) => {
   const contentRef = useRef();
   const [content, setContent] = useState("");
   const [emotion, setEmotion] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
 
-  const { onCreate } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
 
   //감정 이모티콘 클릭시 발생하는 이벤트
   const handleClickEmote = (emotion) => {
@@ -56,14 +56,31 @@ const DiaryEditor = () => {
       contentRef.current.focus();
       return;
     }
-    onCreate(date, content, emotion);
+
+    if (window.confirm(isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?")) {
+      if (!isEdit) {
+        onCreate(date, content, emotion);
+      } else {
+        console.log(originData.id)
+        onEdit(originData.id, date, content, emotion);
+      }
+    }
     navigate('/', { replace: true }); //뒤로 가기를 통해 일기작성페이지로 다시 돌아가는 것 방지
   }
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isEdit) {
+      setDate(getStringDate(new Date(parseInt(originData.date))))
+      setEmotion(originData.emotion)
+      setContent(originData.content)
+    }
+  }, [isEdit, originData]); //edit페이지에서 값을 내려줄 때만 동작하는 코드
+  
   return (
     <div className="DiaryEditor">
-      <MyHeader headText={"새 일기쓰기"} leftChild={<MyButton text={"< 뒤로 가기"} onClick={()=>navigate(-1)}/>}/>
+      <MyHeader headText={isEdit? "일기 수정하기":"새 일기쓰기"} leftChild={<MyButton text={"< 뒤로 가기"} onClick={()=>navigate(-1)}/>}/>
       <div>
         <section>
           <h4>오늘은 언제인가요?</h4>

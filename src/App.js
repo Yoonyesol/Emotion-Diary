@@ -100,7 +100,7 @@ function App() {
   const onEdit = (targetId, date, content, emotion) => {
     dispatch({
       type: "EDIT", data: {
-        id: targetId.current,
+        id: targetId,
         date: new Date(date).getTime(),
         content,
         emotion,
@@ -115,7 +115,7 @@ function App() {
             <Routes> {/*페이지를 경로에 따라 매핑*/}
               <Route path='/' element={<Home />} />
               <Route path='/new' element={<New/>}/>
-              <Route path='/edit' element={<Edit />} />
+              <Route path='/edit/:id' element={<Edit />} />
               <Route path='/diary/:id' element={<Diary />} />
             </Routes>
           </div>
