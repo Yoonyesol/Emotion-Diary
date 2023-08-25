@@ -36,5 +36,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "리액트로 제작한 감정일기 사이트 프로젝트",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "keywords": []
 }
