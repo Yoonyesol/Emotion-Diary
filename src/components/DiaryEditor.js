@@ -5,7 +5,7 @@ import { getStringDate } from "../util/date";
 import { emotionList } from "../util/emotion";
 
 import { useNavigate } from "react-router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import EmotionItem from "./EmotionItem";
 
 const DiaryEditor = ({isEdit, originData}) => {
@@ -17,9 +17,9 @@ const DiaryEditor = ({isEdit, originData}) => {
   const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
 
   //감정 이모티콘 클릭시 발생하는 이벤트
-  const handleClickEmote = (emotion) => {
+  const handleClickEmote = useCallback((emotion) => {
     setEmotion(emotion)
-  }
+  }, [])
 
   const handleSubmit = () => {
     if (content.length < 1) {
