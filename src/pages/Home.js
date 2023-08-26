@@ -27,7 +27,10 @@ const Home = () => {
       const lastDay = new Date(
         curDate.getFullYear(),
         curDate.getMonth() + 1,
-        0
+        0, 
+        23, //31일 일기가 포함되지 않는 버그를 위해 시분초까지 명시
+        59,
+        59
       ).getTime();
       
       //firstDay ~ lastDay 사이의 일기들을 추려서 n월의 일기 데이터를 가져오기
@@ -36,7 +39,6 @@ const Home = () => {
   }, [diaryList, curDate]); //일기 수정/삭제 시, curDate값 변경 시 useEffect가 동작해야 함
   
   useEffect(() => {
-    console.log(data);
   }, [data])
   
   const increaseMonth = () => {

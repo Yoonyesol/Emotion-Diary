@@ -31,7 +31,6 @@ const DiaryEditor = ({isEdit, originData}) => {
       if (!isEdit) {
         onCreate(date, content, emotion);
       } else {
-        console.log(originData.id)
         onEdit(originData.id, date, content, emotion);
       }
     }
