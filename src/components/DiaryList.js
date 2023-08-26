@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import MyButton from "./MyButton"
 import { useNavigate } from "react-router";
 import DiaryItem from "./DiaryItem";
@@ -14,7 +14,7 @@ const filterOptionList = [
   { value: "bad", name: "안 좋은 감정만" },
 ]
 
-const ControlMenu = ({ value, onChange, optionList }) => {
+const ControlMenu = React.memo(({ value, onChange, optionList }) => {
   //value:select가 선택하고 있는 값, onChange: select가 선택하는 값 변화 시 실행될 함수, optionList: select할 옵션의 리스트
   return (
     <select className="ControlMenu" value={value} onChange={(e) => onChange(e.target.value)}>
@@ -23,7 +23,7 @@ const ControlMenu = ({ value, onChange, optionList }) => {
       ))}
     </select>
   );
-}
+})
 
 const DiaryList = ({ diaryList }) => {
   const navigate = useNavigate();
