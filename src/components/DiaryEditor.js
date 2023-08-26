@@ -14,7 +14,7 @@ const DiaryEditor = ({isEdit, originData}) => {
   const [emotion, setEmotion] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
 
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
 
   //감정 이모티콘 클릭시 발생하는 이벤트
   const handleClickEmote = (emotion) => {
@@ -37,6 +37,13 @@ const DiaryEditor = ({isEdit, originData}) => {
     navigate('/', { replace: true }); //뒤로 가기를 통해 일기작성페이지로 다시 돌아가는 것 방지
   }
 
+  const handleRemove = ()=>{
+    if(window.confirm("정말 삭제하시겠습니까?")){
+      onRemove(originData.id);
+      navigate('/', {replace:true})
+    }
+  }
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +56,12 @@ const DiaryEditor = ({isEdit, originData}) => {
   
   return (
     <div className="DiaryEditor">
-      <MyHeader headText={isEdit? "일기 수정하기":"새 일기쓰기"} leftChild={<MyButton text={"< 뒤로 가기"} onClick={()=>navigate(-1)}/>}/>
+      <MyHeader headText={isEdit? "일기 수정하기":"새 일기쓰기"} 
+      leftChild={<MyButton text={"< 뒤로가기"} onClick={()=>navigate(-1)}/>}
+      rightChild = {isEdit && (
+        <MyButton text={"삭제하기"} type={'negative'} onClick={handleRemove}/>
+      )}
+      />
       <div>
         <section>
           <h4>오늘은 언제인가요?</h4>
